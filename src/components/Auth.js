@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { setToken, setUser } from '../redux/features/auth';
 import Cookies from 'js-cookie';
+import { useParams } from 'react-router-dom';
 
 export default function Auth() {
     const [login, setLogin] = useState(true);
@@ -21,6 +22,7 @@ export default function Auth() {
     const { errors } = formState;
     const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch();
+    const { id } = useParams();
     const onSubmit = (values) => {
         if (login) {
             if (user.email === values.email && user.password === values.password) {
@@ -28,7 +30,17 @@ export default function Auth() {
                     setToken("login")
                 )
                 Cookies.set('userData', JSON.stringify(values), { domain: 'localhost', path: '/' });
-                window.location.href = 'http://localhost:3000';
+                switch (id) {
+                    case "1":
+                        window.location.href = 'http://localhost:3000';
+                        break;
+                    case "2":
+                        window.location.href = 'http://localhost:3002';
+                        break;
+                    default:
+                        console.log("default");
+                        break;
+                }
             } else {
                 alert("User is not registered");
             }

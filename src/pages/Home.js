@@ -3,10 +3,11 @@ import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const handleAuth = () => {
-    navigate('/auth')
+  const handleAuth = (id) => {
+    navigate(`/auth/${id}`);
   }
   const navigate = useNavigate();
+  const data = [{ name: "Todo App", id: 1 }, { name: "Demo App", id: 2 }];
   return (
     <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
       <Card variant="outlined" sx={{
@@ -18,20 +19,15 @@ const Home = () => {
             Login to
           </Typography>
           <List>
-            <ListItem button divider onClick={handleAuth}>
+            {data.map((val) =>
+            (<ListItem key={val.id} button divider onClick={() => handleAuth(val.id)}>
               <ListItemIcon>
-                <Avatar >T</Avatar>
+                <Avatar >{val.name[0]}</Avatar>
               </ListItemIcon>
-              <ListItemText primary="Todo App" />
+              <ListItemText primary={val.name} />
               <LoginOutlinedIcon />
-            </ListItem>
-            <ListItem button divider >
-              <ListItemIcon>
-                <Avatar >D</Avatar>
-              </ListItemIcon>
-              <ListItemText primary="Demo App" />
-              <LoginOutlinedIcon />
-            </ListItem>
+            </ListItem>)
+            )}
           </List>
         </CardContent>
       </Card>
