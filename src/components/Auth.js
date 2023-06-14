@@ -43,7 +43,7 @@ export default function Auth() {
     const userData = localStorage.getItem("userData");
     if (userData) {
       dispatch(setUser(JSON.parse(userData)));
-    }// eslint-disable-next-line
+    } // eslint-disable-next-line
   }, []);
   return (
     <Container component="main" maxWidth="xs">
@@ -109,7 +109,6 @@ export default function Auth() {
                 helperText={errors.email?.message}
                 margin="normal"
                 fullWidth
-                autoFocus
               />
             </Grid>
             <Grid item xs={12}>
